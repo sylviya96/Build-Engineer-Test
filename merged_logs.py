@@ -2,7 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
-def _parse_args() -> argparse.Namespace:
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Tool to merge test logs')
     parser.add_argument('loga_file', metavar='<path/to/log1>', type=str, help='Path to dir with generated loga')
     parser.add_argument('logb_file', metavar='<path/to/log2>', type=str, help='Path to dir with generated logb')
@@ -10,7 +10,7 @@ def _parse_args() -> argparse.Namespace:
 
     return parser.parse_args()
 
-def _merge_logs(log_a: Path, log_b: Path, merged_logs: Path) -> None:
+def merge_logs(log_a: Path, log_b: Path, merged_logs: Path) -> None:
     print('merging logs...')
     with open(log_a, 'r') as log_a_file:
         with open(log_b, 'r') as log_b_file:
@@ -39,11 +39,11 @@ def _merge_logs(log_a: Path, log_b: Path, merged_logs: Path) -> None:
                         break
 
 
-args = _parse_args()
+args = parse_args()
 loga_path = Path(args.loga_file)
 logb_path = Path(args.logb_file)
 merged_log_path = Path(args.merged_log_file)
 
-_merge_logs(loga_path, logb_path, merged_log_path)
+merge_logs(loga_path, logb_path, merged_log_path)
 
 print('logs merged')
